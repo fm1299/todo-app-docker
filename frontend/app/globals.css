@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Updated CSS for pure React app with modern dark theme */
 * {
     box-sizing: border-box;
     margin: 0;
