@@ -4,16 +4,21 @@ from jose import JWTError, jwt
 from typing import Optional
 import os
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# Switch to PBKDF2-SHA256 to avoid bcrypt backend & 72-byte limit entirely
+pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 SECRET_KEY = os.getenv("SECRET_KEY", "verysecretkey_change_me")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "60"))
 
+def _normalize_password(password: str) -> str:
+    # For PBKDF2-SHA256 no truncation needed; ensure string type
+    return password if isinstance(password, str) else str(password)
+
 def verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
+    return pwd_context.verify(_normalize_password(plain_password), hashed_password)
 
 def get_password_hash(password):
-    return pwd_context.hash(password)
+    return pwd_context.hash(_normalize_password(password))
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
