@@ -1,8 +1,7 @@
 const API_BASE =
   (typeof import.meta !== "undefined" &&
     import.meta.env &&
-    import.meta.env.VITE_API_URL) ||
-  "http://localhost:30080";
+    import.meta.env.VITE_API_URL);
 
 export async function register(username, password) {
     const res = await fetch(`${API_BASE}/auth/register`, {

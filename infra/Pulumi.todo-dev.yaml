@@ -1,0 +1,15 @@
+config:
+  gcp:project: todo-k8s-477122
+  gcp:region: us-central1
+  gcp:zone: us-central1-a
+  todo-gcp-iac:db-password:
+    secure: AAABAJBTxed6n96RfjKga2lwWYMFQuuUP7I+1WK1qSY1NW1er9y3OXU=
+  todo-gcp-iac:jwt-secret-key:
+    secure: AAABANOiiWsftiq4xcda1ZVC8aMHuLzm8lFO5W5c5+2GeqWrhyEshFUiOOpr858EvQl0
+  todo-gcp-iac:db-user: todo_user
+  todo-gcp-iac:db-name: todo_db
+  todo-gcp-iac:cluster-name: todo-app-cluster
+  todo-gcp-iac:node-count: "3"
+  todo-gcp-iac:backend_image: gcr.io/todo-k8s-477122/todo-backend:fix-cors-1762403405
+  todo-gcp-iac:frontend_image: gcr.io/todo-k8s-477122/todo-frontend:todo-front-fix
+  todo-gcp-iac:postgres_image: gcr.io/todo-k8s-477122/todo-db:latest

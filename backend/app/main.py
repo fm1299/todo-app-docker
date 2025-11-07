@@ -13,18 +13,10 @@ app = FastAPI(title="TodoApp")
 
 # Configure CORS to explicitly allow the frontend origin
 # You can override by setting CORS_ALLOW_ORIGINS to a comma-separated list
-cors_origins_env = os.getenv("CORS_ALLOW_ORIGINS")
-if cors_origins_env:
-    allow_origins = [o.strip() for o in cors_origins_env.split(",") if o.strip()]
-else:
-    allow_origins = [
-        "http://localhost:30000",
-        "http://127.0.0.1:30000",
-    ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allow_origins,
+    allow_origin_regex=".*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

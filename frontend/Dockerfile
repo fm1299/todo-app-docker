@@ -9,6 +9,8 @@ RUN npm install
 
 # Copiar todo el frontend y construir la app
 COPY . .
+ARG VITE_API_URL
+ENV VITE_API_URL=${VITE_API_URL}
 RUN npm run build
 
 # Etapa 2: Servir con Nginx
